@@ -10,10 +10,10 @@ const rock_rock_div = document.getElementById("rock-rock");
 const scissors_div = document.getElementById("scissors");
 
 
-function gameReset(){
-    humanScore = 0;
-    computerScore = 0;
-}
+// function gameReset(){
+//     humanScore = 0;
+//     computerScore = 0;
+// }
 
 function getComputerChoice() {
     const choices = ["paper", "rock", "scissors", "rock_rock"];
@@ -24,20 +24,20 @@ function getComputerChoice() {
 function convertToWords(choice) {
     if (choice === "rock") return "Dwayne 'The Rock' Johnson";
     if (choice === "scissors") return "Scissors";
-    if (choice ==="rock_rock") return "Rock"
+    if (choice ==="rock-rock") return "Rock";
     return "Paper"
 }
 
 function win(user, computer) {
     humanScore++;
     humanScore_span.innerHTML = humanScore;
-    result_p.innerHTML = `Victory!     ${convertToWords(user)} beats ${convertToWords(computer)}!`;
+    result_p.innerHTML = `Victory!  ${convertToWords(user)} beats ${convertToWords(computer)}!`;
     document.getElementById(user).classList.add('wining-animation');
     setTimeout(function() {document.getElementById(user).classList.remove('wining-animation') }, 1000);
-    if (humanScore === 10) {
-        alert('YAYAYYAYAYA game reset');
-        gameReset();
-    }
+    // if (humanScore === 10) {
+    //     alert('YAYAYYAYAYA game reset');
+    //     gameReset();
+    // }
  }
 
 function lose(user, computer) {
@@ -46,11 +46,11 @@ function lose(user, computer) {
     result_p.innerHTML = `Defeat!   ${convertToWords(computer)} beats ${convertToWords(user)}!`;
     document.getElementById(user).classList.add('losing-animation');
     setTimeout(function () { document.getElementById(user).classList.remove('losing-animation') }, 1000);
-    if (computerScore === 10) {
-        alert('Loser! Game reset');
-        gameReset();
+    // if (computerScore === 10) {
+    //     alert('Loser! Game reset');
+    //     gameReset();
 
-    }
+    // }
 }
 
 function tie(user, computer) {
@@ -64,20 +64,21 @@ function game(userChoice) {
     switch (userChoice + computerChoice) {
         case "rockpaper":
         case "rockscissors":
-        case "rockrock_rock":   
+        case "rockrock-rock":   
         case "scissorspaper":
         case "rockscissors":
+        case "rock-rockscissors":
             win(userChoice, computerChoice);
             break;
         case "paperrock":
-        case "rock_rockrock":  
+        case "rock-rockrock":  
         case "scissorsrock":
-        case "scissorsrock_rock":
+        case "scissorsrock-rock":
         case "paperscissors":
             lose(userChoice, computerChoice);
             break;
         case "rockrock":
-        case "rock_rockrock_rock":
+        case "rock-rockrock-rock":
         case "scissorsscissors":
         case "paperpaper":
             tie(userChoice, computerChoice);
@@ -97,7 +98,7 @@ function main() {
         game("scissors");
     })
     rock_rock_div.addEventListener('click', function () {
-        game("rock_rock");
+        game("rock-rock");
     })
 }
 
